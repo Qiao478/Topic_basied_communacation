@@ -11,5 +11,6 @@
 在src下建立python功能包：ros2 pkg create py01_topic --build-type ament_python --dependencies rclpy std_msgs base_interfaces_demo --node-name dem01_taker_str_py
 
 1.发布方实现：编辑dem01_taker_str.cpp文件
+2.订阅方实现：在cpp01_topic的src目录下新建dem02_listener_str.cpp文件
 
 
