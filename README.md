@@ -52,5 +52,9 @@ entry_points={
             'dem01_taker_str_py = py01_topic.dem01_taker_str_py:main',
             'dem02_listener_str_py = py01_topic.dem02_listener_str_py:main'
         ],
+4.编译colcon build --packages-select cpp01_topic
+配置环境变量：. install/setup.bash
+5.执行：
+先执行发布方，再执行订阅方
 
 
