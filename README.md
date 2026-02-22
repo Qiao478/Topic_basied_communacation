@@ -12,6 +12,7 @@
 
 C++
 1.发布方实现：编辑dem01_taker_str.cpp文件
+编辑完后可以运行一下，并新开一个终端输入：ros2 topic echo /chatter来看一下话题有没有发布成功
 2.订阅方实现：在cpp01_topic的src目录下新建dem02_listener_str.cpp文件
 3.编辑配置文件:
 编写完dem02_listener_str文件后修改CMakeLists.txt文件修改内容如下：
@@ -95,4 +96,25 @@ rosidl_generate_interfaces( ${PROJECT_NAME}
 注：生成的python文件在lib/python3.12/base_interfaces_demo下面
 生成的cpp文件在include/detail下面
 
+三、话题通信之自定义消息（C++）
+注意：使用自定义消息时需要配置c_cpp_properties.json文件，在文件中的includePath属性下面添加一行："${workspaceFolder}/install/base_interfaces_demo/include/**"
+
+1.在cpp01_topic文件的src下新建dem03_taker_stu和dem04_listener_stu，并配置CMackList.txt文件，配置内容如下
+add_executable(dem03_taker_stu src/dem03_taker_stu.cpp)
+add_executable(dem04_listener_stu src/dem04_listener_stu.cpp)
+ament_target_dependencies(
+  dem03_taker_stu
+  "rclcpp"
+  "std_msgs"
+  "base_interfaces_demo"
+)
+
+ament_target_dependencies(
+  dem04_listener_stu
+  "rclcpp"
+  "std_msgs"
+  "base_interfaces_demo"
+)
+install(TARGETS dem01_taker_str dem02_listener_str dem03_taker_stu dem04_listener_stu
+  DESTINATION lib/${PROJECT_NAME})
 
