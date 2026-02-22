@@ -120,7 +120,25 @@ install(TARGETS dem01_taker_str dem02_listener_str dem03_taker_stu dem04_listene
   DESTINATION lib/${PROJECT_NAME})
 
 python
-注意：使用自定义消息时需要配置settings.json文件，在文件中的python.autoComplete.extraPaths和python.analysis.extraPaths属性下面添加一行："${workspaceFolder}/install/base_interfaces_demo/local/lib/python3.10/dis-packages"
+注意：使用自定义消息时需要配置settings.json文件，在文件中的python.autoComplete.extraPaths和python.analysis.extraPaths属性下面添加一行："/home/qiao/ros2_workspace/ws01_plumbing/install/base_interfaces_demo/lib/python3.12/site-packages"
+配置后的内容如下：
+{
+    "python.autoComplete.extraPaths": [
+        "/home/qiao/ros2_workspace/ws01_plumbing/install/base_interfaces_demo/lib/python3.12/site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/qiao/ros2_workspace/ws01_plumbing/install/base_interfaces_demo/lib/python3.12/site-packages"
+    ]
+}
+
+1.在py01_topic文件的py01_topic下新建dem03_taker_stu和dem04_listener_stu，并配置setup.py文件，配置好后的内容如下：
+    entry_points={
+        'console_scripts': [
+            'dem01_taker_str_py = py01_topic.dem01_taker_str_py:main',
+            'dem02_listener_str_py = py01_topic.dem02_listener_str_py:main',
+            'dem03_taker_stu_py = py01_topic.dem03_taker_stu_py:main',
+            'dem04_listener_stu_py = py01_topic.dem04_listener_stu_py:main'
+        ],
 
 
 
