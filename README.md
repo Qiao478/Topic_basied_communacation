@@ -96,7 +96,8 @@ rosidl_generate_interfaces( ${PROJECT_NAME}
 注：生成的python文件在lib/python3.12/base_interfaces_demo下面
 生成的cpp文件在include/detail下面
 
-三、话题通信之自定义消息（C++）
+三、话题通信之自定义消息
+C++
 注意：使用自定义消息时需要配置c_cpp_properties.json文件，在文件中的includePath属性下面添加一行："${workspaceFolder}/install/base_interfaces_demo/include/**"
 
 1.在cpp01_topic文件的src下新建dem03_taker_stu和dem04_listener_stu，并配置CMackList.txt文件，配置内容如下
@@ -117,4 +118,11 @@ ament_target_dependencies(
 )
 install(TARGETS dem01_taker_str dem02_listener_str dem03_taker_stu dem04_listener_stu
   DESTINATION lib/${PROJECT_NAME})
+
+python
+注意：使用自定义消息时需要配置settings.json文件，在文件中的python.autoComplete.extraPaths和python.analysis.extraPaths属性下面添加一行："${workspaceFolder}/install/base_interfaces_demo/local/lib/python3.10/dis-packages"
+
+
+
+
 
