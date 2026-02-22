@@ -57,4 +57,42 @@ entry_points={
 5.执行：
 先执行发布方，再执行订阅方
 
+二、话题通信之自定义接口类型
+1.在base_interfaces_demo下新建一个文件夹命名为msg,在msg下新建一个Student.msg文件，文件中写入自定义的类型
+2.修改配置文件：
+打开package.xml，添加编译依赖，执行依赖，声明当前包所属的功能包组,删除下面报错的<test_depend>
+编译和执行依赖可以在终端使用ros2 pkg list | grep -i rosidl命令查询rosidl依赖
+修改万后的内容如下
+  <!--编译依赖-->
+  <build_depend>rosidl_default_generators</build_depend>
+  <!--执行依赖-->
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  <!--声明当前包所属的功能包组-->
+  <member_of_group>rosidl_interface_packages</member_of_group>
+
+  打开CMakeLists.txt，
+  加一行查找的功能包即编译依赖find_package(rosidl_default_generators REQUIRED)
+  用rosidl_generate_interfaces为接口文件生成源码，“”中填写文件的路径
+  修改后的内容如下：
+  find_package(rosidl_default_generators REQUIRED)
+#为接口文件生成源码
+rosidl_generate_interfaces( ${PROJECT_NAME}
+  "msg/Student.msg"
+
+)
+
+配置完成后编译base_interfaces_demo包：在终端输入colcon build --packages-select base_interfaces_demo
+
+刷新环境变量：. install/setup.bash
+测试有没有编译成功：ros2 interface show base_interfaces_demo
+如果编译成功了输出的内容应和Student.msg文件中的内容一致
+
+如果未输出成功可用：
+检查包有没有被构建：ros2 pkg list | grep base_interfaces_demo
+检查文件是否存在：ls -l ~/ros2_workspace/src/ws01_plumbing/src/base_interfaces_demo/msg/Student.msg
+查看文件内容：cat ~/ros2_workspace/src/ws01_plumbing/src/base_interfaces_demo/msg/Student.msg
+
+注：生成的python文件在lib/python3.12/base_interfaces_demo下面
+生成的cpp文件在include/detail下面
+
 
