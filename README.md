@@ -90,6 +90,7 @@ rosidl_generate_interfaces( ${PROJECT_NAME}
 
 如果未输出成功可用：
 检查包有没有被构建：ros2 pkg list | grep base_interfaces_demo
+查看某文件所在的位置：ros2 pkg prefix 包名
 检查文件是否存在：ls -l ~/ros2_workspace/src/ws01_plumbing/src/base_interfaces_demo/msg/Student.msg
 查看文件内容：cat ~/ros2_workspace/src/ws01_plumbing/src/base_interfaces_demo/msg/Student.msg
 
